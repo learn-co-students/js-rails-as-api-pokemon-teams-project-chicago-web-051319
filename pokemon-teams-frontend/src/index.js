@@ -67,10 +67,29 @@ function addCreateFormEvent(form) {
 
 function addPokemon(trainerBtn) {
   // console.log(trainerBtn);
-  const formElements = createForm();
-  trainerBtn.parentNode.insertBefore(formElements.form, trainerBtn);
-  trainerBtn.style.display = "none";
-  addCreateFormEvent(formElements.form)
+  // form WAY
+  // const formElements = createForm();
+  // trainerBtn.parentNode.insertBefore(formElements.form, trainerBtn);
+  // trainerBtn.style.display = "none";
+  // addCreateFormEvent(formElements.form)
+  // OTHER WAY
+  const trainerId = trainerBtn.parentElement.getAttribute("data-id");
+  const formData = {
+    trainer_id: trainerId
+  }
+  const reqObj = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify(formData)
+  }
+  fetch(POKEMONS_URL, reqObj)
+  .then(resp => resp.json())
+  .then(obj => {
+    populatePokemon(obj,trainerBtn.parentElement.querySelector("ul"));
+  });
 }
 
 function addCardEventListener(card) {

@@ -2,39 +2,6 @@ const BASE_URL = "http://localhost:3000"
 const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   let fetchPokemon = fetch(POKEMONS_URL).then(response => response.json()).then(pokemons => pokemons);
-//   let fetchTrainers = fetch(TRAINERS_URL).then(resp => resp.json()).then(trainers => createTrainerCard(trainers));
-//   const mainTag = document.querySelector('#main');
-//
-//   const createTrainerCard = trainers => {
-//     trainers.forEach(trainer => {
-//       let div = document.createElement('div');
-//       div.className = 'card';
-//       div.dataset.id = trainer.id;
-//       div.innerHTML += `<p>${trainer.name}</p>`;
-//       let addPokemon = document.createElement('button');
-//       addPokemon.innerText = 'Add Pokemon';
-//       addPokemon.dataset.trainer_id = trainer.id;
-//       let ul = document.createElement('ul');
-//       console.log(trainer)
-//       div.appendChild(addPokemon);
-//       // ul.innerHTML += getTrainerPokemons(pok);
-//
-//       mainTag.appendChild(div);
-//     });
-//   }
-//   const createPokemonList = pokemons => {
-//     console.log('pokemons = ', pokemons)
-//     pokemons.forEach(pokemon => {
-//       let li = document.create('li');
-//       li.innerText = `${pokemon.nickname} (${pokemon.species})`;
-//       ul.appendChild(li);
-//     });
-//     return ul;
-//   }
-// });
-
 function main() {
  document.addEventListener('DOMContentLoaded', () => {
    getTrainers();
@@ -74,7 +41,6 @@ function handleReleasePokemon(e) {
   const config = {
     method: "DELETE"
   }
-  console.log(e.target.dataset.pokemonId);
   fetch(`${POKEMONS_URL}/${e.target.dataset.pokemonId}`, config)
   .then(response => response.json())
   .then(data => {

@@ -92,14 +92,22 @@ function addPokemon(trainerBtn) {
   });
 }
 
-function addCardEventListener(card) {
-  card.addEventListener("click", (e) => {
+function addCardEventListener() {
+  const main = document.querySelector("main");
+  main.addEventListener("click", (e) => {
     if (e.target.classList.contains("release")) {
       deletePokemonFetch(e.target)
     }else if (e.target.classList.contains("add")) {
       // console.log("Grow Horde");
       // console.log(e.target.parentElement);
-      addPokemon(e.target)
+        addPokemon(e.target)
+      // console.log(e.target.nextSibling.children.length);
+      // length check
+      // if (e.target.nextSibling.children.length < 6) {
+      //   addPokemon(e.target)
+      // }else{
+      //   alert("Too Many Pokemon")
+      // }
     }
   });
 }
@@ -114,7 +122,7 @@ function generateTrainerElements() {
   card.appendChild(addButton);
   card.appendChild(pokemonUl);
   card.classList.add("card");
-  addCardEventListener(card);
+  // addCardEventListener(card);
 
   addButton.classList.add("add")
   return {card, addButton, pokemonUl, trainerName}
@@ -175,6 +183,8 @@ function generateTrainers() {
 
 function application() {
   generateTrainers();
+  addCardEventListener();
+
 }
 
 application()
